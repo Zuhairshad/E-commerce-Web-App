@@ -2,22 +2,18 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/server.js", // <-- CHANGE THIS: Point to your backend/server.js
+      "src": "backend/server.js",
       "use": "@vercel/node"
-      // The "config" and "includeFiles" might be problematic if your built files are not in "dist/" inside "backend/".
-      // For now, it's safer to remove or adjust it, or ensure your build process outputs to "backend/dist".
-      // If "dist" is not used for your backend, you can remove this config block entirely for simplicity.
-      // If "dist" is used and is inside backend, change to:
-      // "config": {
-      //   "includeFiles": ["backend/dist/**"]
-      // }
+      "config": {
+         "includeFiles": ["backend/dist/**"]
+       }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "backend/server.js" // <-- CHANGE THIS: Point to your backend/server.js
+      "dest": "backend/server.js"
     }
   ],
-  "installCommand": "npm install --prefix backend" // <-- ADD THIS: Tells Vercel to run npm install inside the 'backend' folder
+  "installCommand": "npm install --prefix backend"
 }
