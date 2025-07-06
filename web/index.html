@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/vite.svg" />
+    <title>Shad & Co.</title>
+
+    <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js"></script>
+  </head>
+  <body>
+    <!-- ✅ React mounts here -->
+    <div id="root"></div>
+
+    <!-- ✅ Webchat config script -->
+    <script>
+      window.botpress.on("webchat:ready", () => {
+      });
+
+      window.botpress.init({
+        botId: "9931c18f-3b82-4f30-a294-0dd3a11df2d4",
+        clientId: "4d14de22-f55b-4066-a69e-a9973e1b282c",
+        configuration: {
+          version: "v1",
+          botName: "Shad&Co.",
+          botDescription: "Product Related Query Assistant",
+          color: "#000000",
+          variant: "soft",
+          headerVariant: "solid",
+          themeMode: "light",
+          fontFamily: "rubik",
+          radius: 4,
+          feedbackEnabled: true,
+          footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+          allowFileUpload: true
+        }
+      });
+    </script>
+
+    <!-- ✅ Load your React app -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
