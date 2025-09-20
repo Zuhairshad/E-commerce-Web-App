@@ -4,9 +4,13 @@ import userModel from "../models/userModel.js"
 
 const addToCart = async (req,res)=>{
     try{
-        const {userId , itemId, size} = req.body
+        const userId = req.userId; // Get from auth middleware
+        const {itemId, size} = req.body
         const userData = await userModel.findById(userId);
-        let cartData = await userData.cartData;
+        if (!userData) {
+            return res.json({success:false, message:"User not found"});
+        }
+        let cartData = userData.cartData || {};
 
         if (cartData[itemId]){
             if(cartData[itemId][size]){
@@ -34,9 +38,13 @@ catch (error){
 
 const updateCart = async (req, res) => {
   try {
-    const { userId, itemId, size, quantity } = req.body;
+    const userId = req.userId; // Get from auth middleware
+    const { itemId, size, quantity } = req.body;
     const userData = await userModel.findById(userId);
-    let cartData = userData.cartData;
+    if (!userData) {
+        return res.json({success:false, message:"User not found"});
+    }
+    let cartData = userData.cartData || {};
 
     if (!cartData[itemId]) {
       return res.json({ success: false, message: "Item not found in cart" });
@@ -67,9 +75,12 @@ const updateCart = async (req, res) => {
 
 const getUserCart = async (req,res)=>{
     try{
-        const {userId} = req.body
+        const userId = req.userId; // Get from auth middleware
         const userData = await userModel.findById(userId);
-        let cartData = await userData.cartData;
+        if (!userData) {
+            return res.json({success:false, message:"User not found"});
+        }
+        let cartData = userData.cartData || {};
         
         res.json({success:true ,cartData})
     }catch(error){
